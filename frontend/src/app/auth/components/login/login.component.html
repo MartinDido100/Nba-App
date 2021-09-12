@@ -1,0 +1,25 @@
+<div class="login">
+    <h2>Iniciar Sesion</h2>
+    <form autocomplete="off" [formGroup]="loginForm" (ngSubmit)="login()">
+        <mat-form-field appearance="fill" class="form-input">
+            <mat-label>Nombre de usuario*</mat-label>
+            <input matInput
+                   type="text"
+                   class="form-input"
+                   formControlName="username">
+            <mat-error *ngIf="touchedButton && validate('username','required')">Usuario obligatorio</mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="fill" class="form-input">
+            <mat-label>Contraseña*</mat-label>
+            <input matInput
+                   type="password"
+                   class="form-input"
+                   formControlName="password">
+            <mat-error *ngIf="touchedButton && validate('password','required')">Contraseña obligatoria</mat-error>
+          </mat-form-field>
+
+
+          <button mat-raised-button color="primary" type="submit">Ingresar</button>
+    </form>
+</div>

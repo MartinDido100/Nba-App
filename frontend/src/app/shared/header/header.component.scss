@@ -1,0 +1,102 @@
+.header{
+    width: 100%;
+    position: fixed;
+    z-index: 40000;
+    & .nav{
+        width: 100%;
+        padding: 1.5em 3em 1.5em 10em;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        justify-content: space-between;
+        align-items: center;
+        
+        & .img{
+            width: 9em;
+            height: 70px;
+            user-select: none;
+            & img{
+                pointer-events: none;
+                object-fit: contain;
+                width: 100%;
+                height: 100%;
+            }
+        }
+    }
+}
+
+.logged-header{
+    background: #c8102e;
+    & .nav__ul{
+        display: flex;
+
+    }
+
+    & .img{
+        cursor: pointer;
+    }
+
+    & .nav__li{
+        margin-right: 2em;
+        list-style: none;
+        & .nav__a{
+            padding: .5em 1em;
+            text-align: center;
+            color: #eee;
+            font-weight: 500;
+            display: flex;
+            white-space: nowrap;
+            justify-content: center;
+            align-items: center;
+            border: 1.8px solid #eee;
+            border-radius: 10px;
+            text-decoration: none;
+            transition: background .3s ease-in-out;
+            &:hover{
+                background: #1d428a;
+            }
+        }
+        & mat-icon{
+            margin-right: .3em;
+        }
+
+        & .logout{
+            border-radius: 50px;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #1d428a;
+            color: #eee;
+            font-weight: 700;
+            border: 1px solid transparent;
+            cursor: pointer;
+            transition: background .1s ease-in-out,border .1s ease-in-out;
+            margin: 0;
+            &:hover{
+                background: none;
+                border: 1px solid #1d428a;
+            }
+        }
+    }
+
+    & .username__li{
+        user-select: none;
+        margin: 0;
+    }
+
+    & .name{
+        border: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: .5em 1em;
+        text-align: center;
+        font-size: 1.4em;
+        & mat-icon{
+            margin: 0;
+            margin-left: .4em;
+        }
+    }
+}

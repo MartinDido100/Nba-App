@@ -1,0 +1,82 @@
+.player{
+    width: 100%;
+    display: flex;
+    position: relative;
+        & .fav-button{
+            position: absolute;
+            right: 0;
+            bottom: .2em;
+            font-size: 2.5em;
+        }
+        & .unfav{
+            color: #c8102e;
+        }
+    & h2{
+        font-size: clamp(1em,7vw,2.5em);
+        text-decoration-line: underline;
+        white-space: nowrap;
+    }
+    &__img{
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        padding: .2em .8em;
+        & img{
+            width: 100%;
+            height: 100%;
+            border-radius: 2px;
+            object-fit: cover;
+        }
+    }
+    &__text{
+        width: 80%;
+    }
+
+    &__ul{
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        list-style: none;
+        padding-left: 3em;
+        padding-top: 3em;
+    }
+
+    &__li{
+        padding: .5em .5em;
+        margin-bottom: 2em;
+        & h3{
+            text-decoration-line: underline;
+            font-size: 1.6em;
+            font-weight: 600;
+        }
+        & p{
+            font-size: 1.3em;
+        }
+    }
+
+    & .buttons{
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        margin: 0;
+        & .admin-button{
+            user-select: none;
+            cursor: pointer;
+            padding: .3em .3em;
+            display: flex;
+            align-items: center;
+        }
+        & .edit{
+            background: #1d428a;
+        }
+        & .delete{
+            background: #c8102e;
+            margin-right: 1.3em;
+        }
+    }
+
+    & .fav-button{
+        cursor: pointer;
+        user-select: none;
+    }
+}

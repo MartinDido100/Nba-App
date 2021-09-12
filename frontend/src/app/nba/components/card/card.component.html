@@ -1,0 +1,41 @@
+<div class="player">
+    <mat-icon *ngIf="!this.favoritos.includes(this.player._id)" class="fav-button" (click)="addFav()">favorite_border</mat-icon>
+    <mat-icon class="fav-button unfav" (click)="removeFav()" *ngIf="this.favoritos.includes(this.player._id)">favorite</mat-icon>
+    <!-- TODO: Optimizar la carga de icono con clases -->
+    <div class="player__img">
+        <h2>{{ player?.name }}</h2>
+        <img [src]="player?.img" [alt]="player?.name" loading="lazy">
+    </div>
+    <div class="player__text">
+        <ul class="player__ul">
+            <li class="player__li">
+                <h3>
+                    Equipo:
+                </h3>
+                <p>{{ player?.team }}</p>
+            </li>
+            <li class="player__li">
+                <h3>
+                    Edad:
+                </h3>
+                <p>{{ player?.age }} años</p>
+            </li>
+            <li class="player__li">
+                <h3>
+                    Anillos:
+                </h3>
+                <p>{{ player?.titles }}</p>
+            </li>
+            <li>
+                <div class="buttons">
+                        <div class="delete admin-button" *ngIf="usuario.role === 'admin' || usuario.role === 'moderator'" (click)="deletePlayer()">
+                            <mat-icon>close</mat-icon>
+                        </div>
+                        <div class="edit admin-button" (click)="editPlayer()">
+                            <mat-icon>edit</mat-icon>
+                        </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>

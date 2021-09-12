@@ -1,0 +1,48 @@
+<div class="register-container">
+    <h2>Crear cuenta</h2>
+    <form autocomplete="off" [formGroup]="registerForm" (ngSubmit)="register()">
+
+        <mat-form-field appearance="fill" class="form-input">
+            <mat-label>Nombre de usuario*</mat-label>
+            <input matInput
+                   type="text"
+                   class="form-input"
+                   formControlName="username">
+            <mat-error *ngIf="touchedButton && validate('username','required')">Usuario obligatorio</mat-error>
+       </mat-form-field>
+
+
+          <mat-form-field appearance="fill" class="form-input">
+            <mat-label>Correo electronico*</mat-label>
+            <input matInput
+                   type="email"
+                   placeholder="example@exaple.com"
+                   class="form-input"
+                   formControlName="email">
+            <mat-error *ngIf="touchedButton && validate('email','required')">Correo obligatorio</mat-error>
+            <mat-error *ngIf="touchedButton && validate('email','pattern')">Correo invalido</mat-error>
+          </mat-form-field>
+
+
+          <mat-form-field appearance="fill" class="form-input">
+            <mat-label>Contraseña*</mat-label>
+            <input matInput
+                   type="password"
+                   class="form-input"
+                   formControlName="password1">
+            <mat-error *ngIf="touchedButton && validate('password1','required')">Contraseña obligatoria</mat-error>
+          </mat-form-field>
+
+
+          <mat-form-field appearance="fill" class="form-input">
+            <mat-label>Confirmar Contraseña*</mat-label>
+            <input matInput
+                   type="password"
+                   class="form-input"
+                   formControlName="password2">
+            <mat-error *ngIf="touchedButton && validate('password2','noIguales')">Las contraseñas no coinciden</mat-error>
+          </mat-form-field>
+
+          <button mat-raised-button color="primary" type="submit">Crear cuenta</button>
+    </form>
+</div>

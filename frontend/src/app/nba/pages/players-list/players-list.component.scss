@@ -1,0 +1,12 @@
+.grid-container{
+    display: grid;
+    justify-content: center;
+    grid-template-columns: repeat(auto-fit, minmax(min-content,50em));
+    grid-template-rows: repeat(auto-fit,minmax(min-content,max-content));
+    grid-column-gap: 10em;    
+    grid-row-gap: 5em;
+    width: 100%;
+    & .grid-item{
+        border-radius: 4px;
+    }
+}

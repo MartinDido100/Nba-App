@@ -1,0 +1,52 @@
+
+
+<header class="header" *ngIf="!logged, else loggedHeader">
+    <nav class="nav">
+        <div class="img">
+            <img src="./assets/images/nba-logo.png" alt="nba logo" class="nav__img" loading="lazy">
+        </div>
+    </nav>
+</header>
+
+<ng-template #loggedHeader>
+
+    <header class="header logged-header">
+        <nav class="nav">
+            <div class="img" routerLink="/nba">
+                <img src="./assets/images/nba-logo.png" alt="nba logo" class="nav__img" loading="lazy">
+            </div>
+            <ul class="nav__ul">
+                <li class="nav__li">
+                    <a routerLink="/nba" class="nav__a">
+                        <mat-icon>home</mat-icon>
+                        Inicio
+                    </a>
+                </li>
+                <li class="nav__li" *ngIf="dataUser.role === 'admin'">
+                    <a routerLink="/nba/admin" class="nav__a">
+                        <mat-icon>settings</mat-icon>
+                        Administrador
+                    </a>
+                </li>
+                <li class="nav__li">
+                    <a routerLink="/nba/favourites" class="nav__a">
+                        <mat-icon>favorite</mat-icon>
+                        Favoritos
+                    </a>
+                </li>
+                <li class="nav__li username__li">
+                        <div class="name">
+                            {{ dataUser.username }}
+                            <mat-icon>person</mat-icon>
+                        </div>
+                </li>
+                <li class="nav__li">
+                    <div class="logout" (click)="logout()">
+                        <mat-icon class="logout">power_settings_new</mat-icon>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+</ng-template>
