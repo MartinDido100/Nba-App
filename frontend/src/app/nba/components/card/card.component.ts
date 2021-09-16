@@ -3,6 +3,7 @@ import { switchMap, catchError } from 'rxjs/operators';
 import { Usuario } from 'src/app/auth/interfaces/auth.interfaces';
 import { AuthService } from 'src/app/auth/services/auth.service';
 import { Player } from '../../interfaces/nba.interfaces';
+import { NbaService } from '../../services/nba.service';
 
 @Component({
   selector: 'app-card',
@@ -11,50 +12,43 @@ import { Player } from '../../interfaces/nba.interfaces';
 })
 export class CardComponent implements OnInit{
 
-  favoritos: string[] = [];
 
   @Input() usuario!: Usuario;
 
   @Input() player!: Player;
   
-  constructor(private aS: AuthService) { }
+  @Input() favoritos: Player[] = [];
+
+  get favsId(){
+    return this.aS.favsId;
+  }
+
+  constructor(private aS: AuthService,
+              private nS: NbaService) { }
+
+
 
   checkFav(): boolean{
-    return !this.favoritos.includes(this.player._id)
+    return this.favsId.includes(this.player._id);
   } 
 
   deletePlayer(){
-    //TODO:BORRAR JUGADOR BACKEND y HACER FUNCION EN FRONT
+    this.nS.deletePlayer(this.player._id,this.usuario.userId).subscribe()
   }
 
   editPlayer(){
     //TODO:EDITAR JUGADOR BACKEND y HACER FUNCION EN FRONT
   }
 
-
-  getFavsId(){
-    this.aS.getFavsById().subscribe(resp => this.favoritos = resp || [])
-  }
-
   addFav(){
-    this.aS.addFav(this.player._id).subscribe(resp =>{
-      if (resp.ok) {
-        this.favoritos.push(this.player._id)
-      }
-    },error =>console.log)
+    this.aS.addFav(this.player._id).subscribe()
   }
 
   removeFav(){
-    this.aS.removeFav(this.player._id).subscribe(resp =>{
-      if (resp.ok) {
-        const i = this.favoritos.indexOf(this.player._id);
-        this.favoritos.splice(i,1);
-      }
-    })
+    this.aS.removeFav(this.player._id).subscribe()
   }
 
   ngOnInit(): void {
-    this.getFavsId();
   }
 
 }

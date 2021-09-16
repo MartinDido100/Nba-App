@@ -16,11 +16,11 @@ const addFav = async (req, res = response) => {
             $addToSet:{
                 favs: playerId
             }
-        });
+        },{new: true}).populate('favs');
 
         res.status(201).json({
             ok: true,
-            msg: 'Todo salio bien'
+            favs: favDoc.favs
         })
 
     } catch (error) {
@@ -71,11 +71,13 @@ const removeFav = async (req, res = response) => {
             $pull:{
                 favs: playerId
             }
-        });
+        },{new:true}).populate('favs');
+
+        console.log(favDoc);
 
         res.status(201).json({
             ok: true,
-            msg: 'Todo salio bien'
+            favs: favDoc.favs
         })
 
     } catch (error) {

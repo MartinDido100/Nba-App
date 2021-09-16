@@ -9,7 +9,7 @@ const changeRole = async (req, res = response) => {
         //Busco el id del nuevo rol
         const newRole = await Roles.findOne({name: {$in: role}});
 
-        await User.findOneAndUpdate({username},{ role: newRole._id });
+        const userToUpdate = await User.findOneAndUpdate({username},{ role: newRole._id });
 
         return res.status(200).json({
             ok: true,

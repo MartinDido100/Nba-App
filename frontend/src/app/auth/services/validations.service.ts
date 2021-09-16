@@ -10,7 +10,7 @@ export class ValidationsService {
 
 
   validateField(field: string, form: FormGroup,error: string):boolean | undefined{
-    return form.get(field)?.hasError(error);
+    return form.get(field)?.hasError(error) && form.get(field)?.touched;
   }
 
   comparePasswords( pass1: string, pass2: string ){

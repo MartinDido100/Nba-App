@@ -10,29 +10,18 @@ import { Usuario } from '../../../auth/interfaces/auth.interfaces';
 })
 export class FavouritesComponent implements OnInit {
 
-  favoritos: Player[] = [];
-
-
   get dataUser(): Usuario {
     return this.aS.user;
   }
 
-  log(){
-    
-  }
-
-  getFavs(){
-    this.aS.getPlayersFavs().subscribe(
-      resp => {
-        this.favoritos = resp || [];
-      }
-    )
+  get favoritos():Player[]{
+    return this.aS.favs;
   }
 
   constructor(private aS: AuthService) { }
 
+
   ngOnInit(): void {
-    this.getFavs();
   }
 
 }

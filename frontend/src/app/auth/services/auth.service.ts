@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { Observable, of } from 'rxjs';
@@ -14,6 +14,18 @@ export class AuthService {
 
   private usuario!: Usuario;
   private baseUrl: string = environment.baseUrl;
+  private favoritos: Player[] = [];
+
+  get favs(){
+    return [...this.favoritos]
+  }
+
+  get favsId(){
+    const favsId: string[] = this.favoritos.map( fav => {
+      return fav._id
+    })
+    return favsId
+  }
 
   get user(): Usuario {
     return {...this.usuario};
@@ -75,7 +87,7 @@ export class AuthService {
         this.cargarUsuario(resp);
         return resp.ok;
       } ),
-      catchError(err => of(false))
+      catchError(() => of(false))
     )
   }
 
@@ -84,22 +96,10 @@ export class AuthService {
     const url = `${this.baseUrl}/fav/get`;
     const headers = new HttpHeaders().set('userId',this.usuario.userId);
     return this.http.get<AuthResponse>(url,{headers}).pipe(
-      map(resp =>{
-        return resp.favs; 
+      tap( resp => {
+        this.favoritos = resp.favs || []
       })
     )
-  }
-
-  getFavsById(){
-      const url = `${this.baseUrl}/fav/get`;
-      const headers = new HttpHeaders().set('userId',this.usuario.userId);
-      return this.http.get<AuthResponse>(url,{headers}).pipe(
-        map(resp =>{
-          return resp.favs?.map( fav =>{
-            return fav._id
-          } )
-        })
-      )
   }
 
   addFav(playerId: string){
@@ -108,7 +108,11 @@ export class AuthService {
       playerId,
       userId: this.usuario.userId
     }
-    return this.http.put<AuthResponse>(url,body)
+    return this.http.put<AuthResponse>(url,body).pipe(
+      tap(resp => {
+        this.favoritos = resp.favs || []
+      })
+    )
   }
 
   removeFav(playerId:string){
@@ -117,6 +121,18 @@ export class AuthService {
       playerId,
       userId: this.usuario.userId
     }
-    return this.http.put<AuthResponse>(url,body)
+    return this.http.put<AuthResponse>(url,body).pipe(
+      tap(resp => {
+        this.favoritos = resp.favs || []
+      })
+    )
+  }
+
+  changeRole(email: string, username: string, role: string){
+    const url = `${this.baseUrl}/roles/change`;
+    const body = {email,username,role};
+    return this.http.put<AuthResponse>(url,body).pipe(
+      catchError((err: HttpErrorResponse) => of(err.error))
+    )
   }
 }

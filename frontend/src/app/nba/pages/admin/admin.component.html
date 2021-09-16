@@ -1,1 +1,26 @@
-<p>admin works!</p>
+<div class="admin-container">
+    <h2>Cambiar rol de usuario:</h2>
+    <form class="admin-form" [formGroup]="formulario" (ngSubmit)="changeRole()">
+        <mat-form-field appearance="fill" class="form-input">
+            <mat-label>Usuario a cambiar</mat-label>
+            <input matInput
+                   type="text"
+                   class="form-input"
+                   formControlName="username">
+          </mat-form-field>
+
+          <mat-form-field appearance="fill" class="form-input">
+            <mat-label>Role:</mat-label>
+            <mat-select formControlName="role">
+                <mat-option *ngFor="let role of roles" [value]="role">
+                  {{role | titlecase}}
+                </mat-option>
+              </mat-select>
+          </mat-form-field>
+          <button mat-raised-button color="primary" type="submit">Cambiar</button>
+          <div class="messages">
+              <span class="error">{{ errorMsg }}</span>
+              <span class="success">{{ successMsg }}</span>
+          </div>
+    </form>
+</div>

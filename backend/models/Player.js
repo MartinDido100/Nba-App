@@ -1,10 +1,12 @@
 const { Schema, model } = require('mongoose');
+const uniqueValidator = require('mongoose-unique-validator');
 
 
 const PlayerSchema = new Schema({
     name : {
         type: String,
-        required: true
+        required: true,
+        unique: true
     },
     team: {
         type: String,
@@ -20,11 +22,12 @@ const PlayerSchema = new Schema({
     },
     img: {
         type: String,
-        default: 'https://us.123rf.com/450wm/urfandadashov/urfandadashov1809/urfandadashov180901275/109135379-foto-no-disponible-icono-del-vector-aislado-en-la-ilustración-transparente-transparente-concepto-de-.jpg?ver=6'
     }
 },{
     versionKey: false
 });
 
+
+PlayerSchema.plugin(uniqueValidator,{message: 'El {PATH} ya existe'});
 
 module.exports = model('players',PlayerSchema);

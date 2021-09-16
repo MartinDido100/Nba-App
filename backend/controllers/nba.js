@@ -1,7 +1,36 @@
 const { response } = require('express');
 const Player = require('../models/Player');
+const Favorito = require('../models/Favorito');
 
 
+const deletePlayer = async(req, res = response) => {
+    const { playerId, userId } = req.body;
+    try {
+
+        await Favorito.findOneAndUpdate({author: {$in: userId}},{
+            $pull:{
+                favs: playerId
+            }
+        })
+
+        await Player.findOneAndDelete({_id: playerId});
+
+        const dbPlayers = await Player.find();
+
+
+        return res.json({
+            ok: true,
+            players: dbPlayers
+        })
+
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({
+            ok: false,
+            msg:'Algo salio mal'
+        })
+    }
+}
 
 const addPlayer = async (req,res = response) => {
     const { name, team, age, titles , img } = req.body;
@@ -16,17 +45,20 @@ const addPlayer = async (req,res = response) => {
             });
         }
 
-        const newUser = new Player(req.body);
+        
+        const newPlayer = new Player(req.body);
+        
+        if(!img){
+            newPlayer.img = 'https://us.123rf.com/450wm/urfandadashov/urfandadashov1809/urfandadashov180901275/109135379-foto-no-disponible-icono-del-vector-aislado-en-la-ilustración-transparente-transparente-concepto-de-.jpg?ver=6'
+        }
 
-        await newUser.save();
+        await newPlayer.save();
+
+        const dbPlayers = await Player.find();
 
         return res.status(201).json({
             ok: true,
-            name,
-            team,
-            age,
-            titles,
-            img,
+            players : dbPlayers
         })
 
     } catch (error) {
@@ -77,5 +109,6 @@ const getPlayers = async (req, res = response ) =>{
 
 module.exports = {
     getPlayers,
-    addPlayer
+    addPlayer,
+    deletePlayer
 }

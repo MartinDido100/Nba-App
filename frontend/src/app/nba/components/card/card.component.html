@@ -1,7 +1,6 @@
 <div class="player">
-    <mat-icon *ngIf="!this.favoritos.includes(this.player._id)" class="fav-button" (click)="addFav()">favorite_border</mat-icon>
-    <mat-icon class="fav-button unfav" (click)="removeFav()" *ngIf="this.favoritos.includes(this.player._id)">favorite</mat-icon>
-    <!-- TODO: Optimizar la carga de icono con clases -->
+        <mat-icon *ngIf="!checkFav()" class="fav-button" (click)="addFav()">favorite_border</mat-icon>
+        <mat-icon class="fav-button unfav" (click)="removeFav()" *ngIf="checkFav()">favorite</mat-icon>
     <div class="player__img">
         <h2>{{ player?.name }}</h2>
         <img [src]="player?.img" [alt]="player?.name" loading="lazy">

@@ -5,12 +5,28 @@ const User = require('../models/User');
 
 const verificarRol = async (req, res = response ,next) => {
 
-    const { email, role } = req.body;
+    const { email, username } = req.body;
     try {
-        const user = await User.findOne({email});
-        console.log(user);
-        if(user.role !== '6132b7ee44786d887cbaef92' || role === 'admin'){
-            console.log("entre al if");
+        const user = await User.findOne({email}).populate('role');
+
+        const userToChange = await User.findOne({username});
+
+        if(!userToChange){
+            return res.status(404).json({
+                ok: false,
+                msg:'No se encontro el usuario'
+            })
+        }
+
+
+        if(userToChange.username === 'Padre'){
+            return res.status(400).json({
+                ok: false,
+                msg: 'Sos padre flaco'
+            })
+        }
+
+        if(user.role.name !== 'admin'){
             return res.status(400).json({
                 ok: false,
                 msg: 'No tienes permisos para hacer esta accion'
@@ -18,7 +34,7 @@ const verificarRol = async (req, res = response ,next) => {
         }
 
     } catch (error) {
-        
+        console.log(error)
     }
 
     next();

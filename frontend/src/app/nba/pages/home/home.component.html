@@ -1,4 +1,59 @@
 <app-header [logged]="true"></app-header>
+<div class="modal-container" [@openCloseModal]="stateName">
+    <div class="modal">
+        <mat-icon (click)="toggleModal()">close</mat-icon>
+        <h3>Agregar nuevo jugador</h3>
+        <form autocomplete="off" [formGroup]="addForm" (ngSubmit)="addPlayer()">
+            <div class="form-field">                
+                <label>*Nombre:</label>
+                <input type="text"
+                       formControlName="nombre">
+                <span class="error-span" *ngIf="validarCampo('nombre','required') && sent">Campo obligatorio*</span>
+            </div>
+
+            <div class="form-field">
+                <label>*Equipo:</label>
+                <input type="text"
+                       formControlName="equipo">
+                <span class="error-span" *ngIf="validarCampo('equipo','required') && sent">Campo obligatorio*</span>
+            </div>
+
+            <div class="row">
+                <div class="form-field number">
+                    <label>*Edad:</label>
+                    <input type="number"
+                           min="0"
+                           formControlName="edad"
+                           max="100"
+                           >
+                    <span class="error-span" *ngIf="validarCampo('edad','required') && sent">Campo obligatorio*</span>
+                    <span class="error-span" *ngIf="validarCampo('edad','min') && sent">Debe ser mayor a 18</span>
+                </div>
+    
+                <div class="form-field number">                
+                    <label>*Titulos:</label>
+                    <input type="number"
+                           min="0"
+                           formControlName="titulos">
+                </div>
+            </div>
+
+            <div class="form-field">
+                <label>Imagen(Url):</label>
+                <input type="text"
+                       formControlName="imagen">
+            </div>
+
+            <button type="submit">Agregar</button>
+        </form>
+        <div class="messages" *ngIf="modalError">
+            <span>{{ modalError }}</span>
+        </div>
+    </div>
+</div>
 <main class="main">
     <router-outlet></router-outlet>
+    <div class="add-button" (click)="toggleModal()">
+        <mat-icon>add</mat-icon>
+    </div>
 </main>

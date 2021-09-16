@@ -11,28 +11,30 @@ import { Usuario } from 'src/app/auth/interfaces/auth.interfaces';
 })
 export class PlayersListComponent implements OnInit {
 
-  players :Player[] = [];
 
   get dataUser(): Usuario{
     return this.aS.user
+  }
+
+  get favs(){
+    return this.aS.favs;
+  }
+
+  get players(){
+    return this.nS.playersArray;
   }
 
   constructor(private nS: NbaService,
               private aS: AuthService) { }
 
   getPlayers(){
-    this.nS.getAllPlayers().subscribe(
-      (resp) => {
-        if(resp){
-          this.players = resp
-        }
-      }
-    )
+    this.nS.getAllPlayers().subscribe()
   }
-  
+
+
   ngOnInit(): void {
     this.getPlayers();
   }
-  
+
 
 }
