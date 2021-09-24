@@ -7,7 +7,8 @@
             <input matInput
                    type="text"
                    class="form-input"
-                   formControlName="username">
+                   formControlName="username"
+                   autocomplete="off">
             <mat-error *ngIf="touchedButton && validate('username','required')">Usuario obligatorio</mat-error>
        </mat-form-field>
 
@@ -18,7 +19,8 @@
                    type="email"
                    placeholder="example@exaple.com"
                    class="form-input"
-                   formControlName="email">
+                   formControlName="email"
+                   autocomplete="off">
             <mat-error *ngIf="touchedButton && validate('email','required')">Correo obligatorio</mat-error>
             <mat-error *ngIf="touchedButton && validate('email','pattern')">Correo invalido</mat-error>
           </mat-form-field>
@@ -29,7 +31,8 @@
             <input matInput
                    type="password"
                    class="form-input"
-                   formControlName="password1">
+                   formControlName="password1"
+                   autocomplete="off">
             <mat-error *ngIf="touchedButton && validate('password1','required')">Contraseña obligatoria</mat-error>
           </mat-form-field>
 
@@ -39,7 +42,8 @@
             <input matInput
                    type="password"
                    class="form-input"
-                   formControlName="password2">
+                   formControlName="password2"
+                   autocomplete="off">
             <mat-error *ngIf="touchedButton && validate('password2','noIguales')">Las contraseñas no coinciden</mat-error>
           </mat-form-field>
 

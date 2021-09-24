@@ -12,6 +12,11 @@ const routerFavs = require('./routes/favs');
 const { dbConnection } = require('./db/config');
 const { createRoles } = require('./libs/initialSetup'); 
 
+const http = require("http");
+setInterval(function() {
+    http.get("https://nba-crud.herokuapp.com");
+}, 300000); //Entra a heroku cada 5 minutos
+
 
 //.env
 dotenv.config({path: 'backend/.env'});
