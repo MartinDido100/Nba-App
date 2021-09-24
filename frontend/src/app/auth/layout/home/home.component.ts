@@ -8,7 +8,9 @@ import { CookieService } from 'ngx-cookie-service';
 })
 export class HomeComponent implements OnInit, AfterViewInit {
 
+  clicked: string = ''
   constructor(private cS: CookieService) { }
+
   ngAfterViewInit(): void {
     this.cS.delete('token');
     this.cS.deleteAll('/');
@@ -17,6 +19,10 @@ export class HomeComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     this.cS.delete('token');
     this.cS.deleteAll('/');
+  }
+
+  clickedHeader( event: string ){
+    this.clicked = event
   }
 
 }

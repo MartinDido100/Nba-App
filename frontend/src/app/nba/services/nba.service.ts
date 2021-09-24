@@ -11,10 +11,15 @@ import { of } from 'rxjs';
 export class NbaService {
 
   private players: Player[] = [];
+  private singlePlayer!: Player
   private baseUrl: string = environment.baseUrl;
 
   get playersArray(){
     return [...this.players]
+  }
+
+  get player(){
+    return {...this.singlePlayer}
   }
 
   constructor(private http: HttpClient) { }
@@ -41,6 +46,12 @@ export class NbaService {
     )
   }
 
+  getPlayer(name: string){
+    const param = name.split('-').join(' ');
+    const url: string = `${this.baseUrl}/nba/getPlayer/${param}`;
+    return this.http.get<Player>(url)
+  }
+
   deletePlayer(playerId: string, userId: string){
     const url: string = `${this.baseUrl}/nba/delete`;
     const body = {
@@ -49,6 +60,22 @@ export class NbaService {
     }
     return this.http.delete<PlayerResponse>(url,{body}).pipe(
       tap(resp => this.players = resp.players!)
+    )
+  }
+
+  editPlayer(name:string , team:string , age:string , titles:string , img:string, playerId: string){
+    const url: string = `${this.baseUrl}/nba/edit`;
+    const body = {
+      name,
+      team,
+      age,
+      titles,
+      img,
+      playerId
+    }
+    return this.http.put<PlayerResponse>(url,body).pipe(
+      tap(resp => this.players = resp.players || []),
+      catchError((err: HttpErrorResponse) => of(err.error))
     )
   }
   

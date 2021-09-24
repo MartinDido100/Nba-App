@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ValidationsService } from '../../services/validations.service';
 import { AuthService } from '../../services/auth.service';
@@ -12,6 +12,8 @@ import { HttpErrorResponse } from '@angular/common/http';
 })
 export class LoginComponent implements OnInit {
 
+  @Output() onCrossClicked: EventEmitter<string> = new EventEmitter();
+  loginError: string = ''
   touchedButton: boolean = false
 
   loginForm: FormGroup = this.fB.group({
@@ -47,7 +49,7 @@ export class LoginComponent implements OnInit {
           this.router.navigateByUrl('/nba');
         }
       },
-      (err : HttpErrorResponse) => console.log(err.error.msg)
+      (err : HttpErrorResponse) => this.loginError = err.error.msg
     )
 
   }

@@ -47,7 +47,6 @@ const registerUser = async (req, res = response) => {
 
     } catch (error) {
         const errores = error.errors;
-        console.log(typeof errores);
         return res.status(500).json({
             ok: false,
             msg:errores,

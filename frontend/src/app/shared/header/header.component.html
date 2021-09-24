@@ -5,6 +5,16 @@
         <div class="img">
             <img src="./assets/images/nba-logo.png" alt="nba logo" class="nav__img" loading="lazy">
         </div>
+        <ul class="nav__ul" #navUl>
+            <li class="nav__li-unlogged" (click)="emitForm('registerForm')" (click)="closeMenu()">Registrarse</li>
+            <li class="nav__li-unlogged" (click)="emitForm('loginForm')" (click)="closeMenu()">Ingresar</li>
+            <li class="close-icon">
+                <mat-icon class="cross-icon" (click)="closeMenu()">close</mat-icon>
+            </li>
+        </ul>
+        <div class="menu" (click)="openMenu()">
+            <mat-icon>menu</mat-icon>
+        </div>
     </nav>
 </header>
 
@@ -15,21 +25,21 @@
             <div class="img" routerLink="/nba">
                 <img src="./assets/images/nba-logo.png" alt="nba logo" class="nav__img" loading="lazy">
             </div>
-            <ul class="nav__ul">
+            <ul class="nav__ul" #navUl>
                 <li class="nav__li">
-                    <a routerLink="/nba" class="nav__a">
+                    <a routerLink="/nba" class="nav__a" (click)="closeMenu()">
                         <mat-icon>home</mat-icon>
                         Inicio
                     </a>
                 </li>
                 <li class="nav__li" *ngIf="dataUser.role === 'admin'">
-                    <a routerLink="/nba/admin" class="nav__a">
+                    <a routerLink="/nba/admin" class="nav__a" (click)="closeMenu()">
                         <mat-icon>settings</mat-icon>
                         Administrador
                     </a>
                 </li>
                 <li class="nav__li">
-                    <a routerLink="/nba/favourites" class="nav__a">
+                    <a routerLink="/nba/favourites" class="nav__a" (click)="closeMenu()">
                         <mat-icon>favorite</mat-icon>
                         Favoritos
                     </a>
@@ -45,7 +55,13 @@
                         <mat-icon class="logout">power_settings_new</mat-icon>
                     </div>
                 </li>
+                <li class="close-icon">
+                    <mat-icon class="cross-icon" (click)="closeMenu()">close</mat-icon>
+                </li>
             </ul>
+            <div class="menu" (click)="openMenu()">
+                <mat-icon>menu</mat-icon>
+            </div>
         </nav>
     </header>
 

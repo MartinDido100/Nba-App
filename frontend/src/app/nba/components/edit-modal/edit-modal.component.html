@@ -1,0 +1,56 @@
+    <div class="form-container">
+        <h3>{{ playerName }} </h3>
+        <form autocomplete="off" [formGroup]="editForm" (ngSubmit)="editPlayer()">
+            <div class="form-field">                
+                <label>*Nombre:</label>
+                <input type="text"
+                       formControlName="nombre"
+                       value="pelotudo">
+                <span class="error-span" *ngIf="validarCampo('nombre','required') && sent">Campo obligatorio*</span>
+            </div>
+    
+            <div class="form-field">
+                <label>*Equipo:</label>
+                <input type="text"
+                       formControlName="equipo">
+                <span class="error-span" *ngIf="validarCampo('equipo','required') && sent">Campo obligatorio*</span>
+            </div>
+    
+            <div class="row">
+                <div class="form-field number">
+                    <label>*Edad:</label>
+                    <input type="number"
+                           min="0"
+                           formControlName="edad"
+                           max="100"
+                           >
+                    <span class="error-span" *ngIf="validarCampo('edad','required') && sent">Campo obligatorio*</span>
+                    <span class="error-span" *ngIf="validarCampo('edad','min') && sent">Debe ser mayor a 18</span>
+                </div>
+    
+                <div class="form-field number">                
+                    <label>*Titulos:</label>
+                    <input type="number"
+                           min="0"
+                           formControlName="titulos">
+                </div>
+            </div>
+    
+            <div class="form-field">
+                <label>*Imagen(Url):</label>
+                <input type="text"
+                       formControlName="imagen">
+                <span class="error-span" *ngIf="validarCampo('image','required') && sent">Url obligatorio*</span>
+            </div>
+    
+            <button type="submit">Editar</button>
+        </form>
+        <div class="messages" *ngIf="modalError">
+            <span>{{ modalError }}</span>
+        </div>
+    </div>
+
+
+
+
+

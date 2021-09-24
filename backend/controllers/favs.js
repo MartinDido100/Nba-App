@@ -73,8 +73,6 @@ const removeFav = async (req, res = response) => {
             }
         },{new:true}).populate('favs');
 
-        console.log(favDoc);
-
         res.status(201).json({
             ok: true,
             favs: favDoc.favs

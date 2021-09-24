@@ -1,5 +1,5 @@
-import { AfterViewInit, Component, Input, OnInit } from '@angular/core';
-import { switchMap, catchError } from 'rxjs/operators';
+import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Usuario } from 'src/app/auth/interfaces/auth.interfaces';
 import { AuthService } from 'src/app/auth/services/auth.service';
 import { Player } from '../../interfaces/nba.interfaces';
@@ -12,7 +12,6 @@ import { NbaService } from '../../services/nba.service';
 })
 export class CardComponent implements OnInit{
 
-
   @Input() usuario!: Usuario;
 
   @Input() player!: Player;
@@ -24,9 +23,8 @@ export class CardComponent implements OnInit{
   }
 
   constructor(private aS: AuthService,
-              private nS: NbaService) { }
-
-
+              private nS: NbaService,
+              private router: Router) { }
 
   checkFav(): boolean{
     return this.favsId.includes(this.player._id);
@@ -36,12 +34,12 @@ export class CardComponent implements OnInit{
     this.nS.deletePlayer(this.player._id,this.usuario.userId).subscribe()
   }
 
-  editPlayer(){
-    //TODO:EDITAR JUGADOR BACKEND y HACER FUNCION EN FRONT
-  }
-
   addFav(){
     this.aS.addFav(this.player._id).subscribe()
+  }
+
+  param(){
+    return this.player.name.split(' ').join('-');
   }
 
   removeFav(){

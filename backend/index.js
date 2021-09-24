@@ -1,7 +1,7 @@
 const express = require('express');
 const cors = require('cors');
 const dotenv = require('dotenv');
-
+const path = require('path')
 
 
 
@@ -33,7 +33,7 @@ app.use('/api/nba',routerNba);
 app.use('/api/roles',routerRoles);
 app.use('/api/fav',routerFavs);
 
-
+app.use(express.static(path.join(__dirname,'../frontend/docs')));
 
 //Server listen
 app.listen(port,()=>{

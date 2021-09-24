@@ -15,6 +15,9 @@ import {MatInputModule} from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
 import {MatSelectModule} from '@angular/material/select';
 import { ReactiveFormsModule } from '@angular/forms';
+import { EditModalComponent } from './components/edit-modal/edit-modal.component';
+import { EditPlayerComponent } from './pages/edit-player/edit-player.component';
+import { RouterModule } from '@angular/router';
 
 
 
@@ -26,6 +29,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     FavouritesComponent,
     CardComponent,
     PlayersListComponent,
+    EditModalComponent,
+    EditPlayerComponent,
   ],
   imports: [
     CommonModule,
@@ -37,6 +42,7 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatFormFieldModule,
     MatSelectModule,
     ReactiveFormsModule,
+    RouterModule
     
   ],
   schemas:[

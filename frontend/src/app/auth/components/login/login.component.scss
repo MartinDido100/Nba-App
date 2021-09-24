@@ -1,6 +1,7 @@
 .login{
-    padding: 2em 2em;
-
+    padding: 2em 2em 1em;
+    display: flex;
+    flex-direction: column;
     & form{
         display: flex;
         flex-direction: column;
@@ -14,5 +15,39 @@
 
     & input{
         font-size: 1.3em;
+    }
+
+    button{
+        background: #af0505;
+    }
+
+    .login-error{
+        color: #d40303;
+        font-size: 1.4em;
+        margin-top: 1em;
+    }
+
+    .close-icon{
+        cursor: pointer;
+        user-select: none;
+        position: absolute;
+        top: 2%;
+        right: 3%;
+        font-size: 2em;
+    }
+
+    p{
+        margin-top: 1.2em;
+        font-size: 1.5em;
+        @media screen and (max-width: 392px){
+            font-size: 1.1em;
+        }
+    }
+    span{
+        cursor: pointer;
+        color: #8ab4f8;
+        &:hover{
+            text-decoration: underline;
+        }
     }
 }

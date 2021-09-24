@@ -6,6 +6,7 @@ import { AdminComponent } from './pages/admin/admin.component';
 import { AddPlayerComponent } from './pages/add-player/add-player.component';
 import { PlayersListComponent } from './pages/players-list/players-list.component';
 import { AdminGuard } from './guards/admin.guard';
+import { EditPlayerComponent } from './pages/edit-player/edit-player.component';
 
 const routes: Routes = [
   {
@@ -15,7 +16,8 @@ const routes: Routes = [
       { path:'', component: PlayersListComponent },
       { path:'favourites', component: FavouritesComponent },
       { path:'admin', component: AdminComponent, canActivate: [AdminGuard] },
-      { path:'add', component: AddPlayerComponent }
+      { path:'add', component: AddPlayerComponent },
+      { path: 'editar/:name', component: EditPlayerComponent }
     ]
   },
   { path:'**', redirectTo: '' },

@@ -1,6 +1,7 @@
 const { response } = require('express');
 const Player = require('../models/Player');
 const Favorito = require('../models/Favorito');
+const { body } = require('express-validator');
 
 
 const deletePlayer = async(req, res = response) => {
@@ -107,8 +108,77 @@ const getPlayers = async (req, res = response ) =>{
 }
 
 
+const editPlayer = async(req, res = response) => {
+
+    const { name,team,age,titles,img,playerId } = req.body
+
+    try {
+
+        const dbPlayer = await Player.findByIdAndUpdate({ _id: playerId },{
+            name, 
+            team, 
+            age, 
+            titles, 
+            img
+        });
+
+        if(!dbPlayer){
+            return res.status(400).json({
+                ok: false,
+                msg: 'El jugador no se encuentra en la lista'
+            });
+        }
+
+        const players = await Player.find();
+
+        return res.json({
+            ok: true,
+            players
+        });  
+
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({
+            ok: false,
+            msg:'Algo salio mal'
+        })
+    }
+
+}
+
+const getPlayer = async(req, res = response) => {
+
+    const { name } = req.params;
+    
+    try {
+        
+        const player = await Player.findOne({ name });
+
+        if(!player){
+            return res.status(400).json({
+                ok: false,
+                msg: 'El jugador no existe'
+            })
+        }
+
+        return res.json({
+            ...player._doc
+        })
+
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({
+            ok: false,
+            msg:'Algo salio mal'
+        })
+    }
+
+}
+
 module.exports = {
     getPlayers,
     addPlayer,
-    deletePlayer
+    deletePlayer,
+    editPlayer,
+    getPlayer
 }

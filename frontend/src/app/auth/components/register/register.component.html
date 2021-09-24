@@ -45,4 +45,7 @@
 
           <button mat-raised-button color="primary" type="submit">Crear cuenta</button>
     </form>
+    <p>¿Ya tienes cuenta? <span (click)="onCrossClicked.emit('loginForm')">Inicia Sesion</span></p>
+    <span class="register-error"> {{ registerErrorMsg }} </span>
+    <mat-icon class="close-icon" (click)="onCrossClicked.emit('')">close</mat-icon>
 </div>

@@ -2,15 +2,55 @@
     width: 100%;
     position: fixed;
     z-index: 40000;
+    padding: 1.5em 3em 1.5em 10em;
+    @media screen and (max-width:395px){
+        padding-left: 10%;
+    }
     & .nav{
         width: 100%;
-        padding: 1.5em 3em 1.5em 10em;
         display: flex;
         flex-direction: row;
         flex-wrap: nowrap;
         justify-content: space-between;
         align-items: center;
-        
+        &__ul{
+            display: flex;
+            transition: transform 0;
+            @media screen and (max-width: 1050px){
+                background: #0000008e;
+                backdrop-filter: blur(10px);
+                width: 100%;
+                position: fixed;
+                left: 0;
+                top: 0;
+                height: 100vh;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                transform: translateX(100%);
+                padding-left: 3em;
+            }
+        }
+
+        &__li-unlogged{
+            list-style: none;
+            margin-right: 1.4em;
+            font-size: 1.3em;
+            cursor: pointer;
+            user-select: none;
+            background: #1d418a6b;
+            backdrop-filter: blur(10px);
+            padding: .5em .5em;
+            border-radius: 5px;
+            @media screen and (max-width: 1050px){
+                width: 15.2em;
+                max-width: 50%;
+                margin-top: 3em;
+                background: #be09039d;
+                text-align: center;
+            }
+        }
+
         & .img{
             width: 9em;
             height: 70px;
@@ -22,14 +62,34 @@
                 height: 100%;
             }
         }
+
+        .active{
+            transform: translateX(0);
+            transition: transform .2s ease-in;
+        }
     }
 }
 
 .logged-header{
     background: #c8102e;
+    @media screen and (max-width: 1050px){
+        padding-left: 5%
+    }
     & .nav__ul{
         display: flex;
-
+        @media screen and (max-width: 1050px){
+            background: #0000008e;
+            backdrop-filter: blur(10px);
+            width: 100%;
+            position: fixed;
+            left: 0;
+            top: 0;
+            height: 100vh;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transform: translateX(100%);
+        }
     }
 
     & .img{
@@ -39,10 +99,13 @@
     & .nav__li{
         margin-right: 2em;
         list-style: none;
+        @media screen and (max-width: 1050px){
+            width: 27.2em;
+            max-width: 50%;
+            margin-top: 4.1em;
+        }
         & .nav__a{
             padding: .5em 1em;
-            text-align: center;
-            color: #eee;
             font-weight: 500;
             display: flex;
             white-space: nowrap;
@@ -52,6 +115,11 @@
             border-radius: 10px;
             text-decoration: none;
             transition: background .3s ease-in-out;
+            @media screen and (max-width: 1050px){
+                padding: 1em 1em;
+                justify-content: flex-start;
+                background: #1d428a;
+            }
             &:hover{
                 background: #1d428a;
             }
@@ -97,6 +165,54 @@
         & mat-icon{
             margin: 0;
             margin-left: .4em;
+            @media screen and (max-width: 1050px){
+                margin-left: 0.2em;
+                font-size: 1em;
+            }
+        }
+        @media screen and (max-width: 1050px){
+            position: absolute;
+            top: 4%;
+            left: 12%;
+            font-size: 2em;
+            border: 2px solid #eee;
+            background: #1d428a;
+            padding: 0.4em;
+        }
+    }
+
+    .active{
+        transform: translate(0);
+        transition: transform .2s ease-in;
+    }
+
+}
+
+
+.menu{
+    display: none;
+    mat-icon{
+        font-size: 3em;
+        cursor: pointer;
+        user-select: none;
+    }
+    @media screen and (max-width: 1050px){
+        display: block;
+    }
+}
+
+.close-icon{
+    list-style: none;
+    display: none;
+    @media screen and (max-width: 1050px){
+        display: block;
+        position: absolute;
+        top: 4%;
+        right: 10%;
+        & mat-icon{
+            font-size: 3em;
+            cursor: pointer;
+            user-select: none;
         }
     }
 }

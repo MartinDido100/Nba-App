@@ -22,4 +22,7 @@
 
           <button mat-raised-button color="primary" type="submit">Ingresar</button>
     </form>
+    <p>¿No tienes cuenta? <span (click)="onCrossClicked.emit('registerForm')">Registrate</span></p>
+    <span class="login-error"> {{ loginError }} </span>
+    <mat-icon class="close-icon" (click)="onCrossClicked.emit('')">close</mat-icon>
 </div>

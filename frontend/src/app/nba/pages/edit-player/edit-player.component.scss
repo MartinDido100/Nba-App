@@ -1,0 +1,7 @@
+.edit-container{
+    margin-top: 11em;
+    padding: 0 5em;
+    @media screen and (max-width: 560px){
+        padding: 0;
+    }
+}

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ValidationsService } from '../../services/validations.service';
 import { AuthService } from '../../services/auth.service';
@@ -12,6 +12,11 @@ import { HttpErrorResponse } from '@angular/common/http';
 })
 export class RegisterComponent implements OnInit {
 
+
+  @Output() onCrossClicked: EventEmitter<string> = new EventEmitter();
+
+  registerErrorMsg: string = '';
+  registerErrorsArray: string[] = [];
   public touchedButton: boolean = false;
 
   registerForm: FormGroup = this.fB.group({
@@ -41,6 +46,7 @@ export class RegisterComponent implements OnInit {
   register() { 
     this.touchedButton = true;
     if(this.registerForm.invalid){
+      this.registerForm.markAllAsTouched();
       return;
     }
     
@@ -53,7 +59,11 @@ export class RegisterComponent implements OnInit {
         }
       },
       (err: HttpErrorResponse) => {
-        console.log(err.error.msg);
+        this.registerErrorsArray = [];
+        Object.keys(err.error.msg).forEach( errorKey => {
+          this.registerErrorsArray.push(err.error.msg[errorKey].message);
+        } );
+        this.registerErrorMsg = this.registerErrorsArray.join(', ')
       }
     );
 

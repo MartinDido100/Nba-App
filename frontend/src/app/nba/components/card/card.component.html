@@ -30,7 +30,7 @@
                         <div class="delete admin-button" *ngIf="usuario.role === 'admin' || usuario.role === 'moderator'" (click)="deletePlayer()">
                             <mat-icon>close</mat-icon>
                         </div>
-                        <div class="edit admin-button" (click)="editPlayer()">
+                        <div class="edit admin-button" [routerLink]="['/nba/editar',param()]">
                             <mat-icon>edit</mat-icon>
                         </div>
                 </div>
