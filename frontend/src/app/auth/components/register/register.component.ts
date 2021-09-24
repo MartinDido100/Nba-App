@@ -18,6 +18,7 @@ export class RegisterComponent implements OnInit {
   registerErrorMsg: string = '';
   registerErrorsArray: string[] = [];
   public touchedButton: boolean = false;
+  cargando: boolean = false;
 
   registerForm: FormGroup = this.fB.group({
     username: ['', [ Validators.required]],
@@ -49,6 +50,8 @@ export class RegisterComponent implements OnInit {
       this.registerForm.markAllAsTouched();
       return;
     }
+
+    this.cargando = true;
     
     const { username, email, password1 } = this.registerForm.value;
 

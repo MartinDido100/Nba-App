@@ -43,7 +43,8 @@
             <mat-error *ngIf="touchedButton && validate('password2','noIguales')">Las contraseñas no coinciden</mat-error>
           </mat-form-field>
 
-          <button mat-raised-button color="primary" type="submit">Crear cuenta</button>
+          <button mat-raised-button color="primary" type="submit" *ngIf="!cargando">Crear Cuenta</button>
+          <div class='spinner' *ngIf="cargando"></div>
     </form>
     <p>¿Ya tienes cuenta? <span (click)="onCrossClicked.emit('loginForm')">Inicia Sesion</span></p>
     <span class="register-error"> {{ registerErrorMsg }} </span>

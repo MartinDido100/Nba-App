@@ -15,10 +15,11 @@ export class LoginComponent implements OnInit {
   @Output() onCrossClicked: EventEmitter<string> = new EventEmitter();
   loginError: string = ''
   touchedButton: boolean = false
+  cargando: boolean = false;
 
   loginForm: FormGroup = this.fB.group({
-    username: ['Padre', [ Validators.required]],
-    password: ['degeneracionx12',[Validators.required]]
+    username: ['', [ Validators.required]],
+    password: ['',[Validators.required]]
   })
 
   constructor(private fB: FormBuilder,
@@ -27,6 +28,7 @@ export class LoginComponent implements OnInit {
               private router: Router) { }
 
   ngOnInit(): void {
+    this.cargando = false;
   }
 
   validate(field:string,error: string){
@@ -38,8 +40,10 @@ export class LoginComponent implements OnInit {
   login(){
     this.touchedButton = true;
     if(this.loginForm.invalid){
+      this.loginForm.markAllAsTouched();
       return;
     }
+    this.cargando = true;
 
     const { username, password } = this.loginForm.value;
 
