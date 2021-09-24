@@ -35,6 +35,10 @@ app.use('/api/fav',routerFavs);
 
 app.use(express.static(path.join(__dirname,'../frontend/docs')));
 
+app.get('*',(req,res)=>{
+    res.sendFile(path.join(__dirname, '../frontend/docs/index.html'));
+})
+
 //Server listen
 app.listen(port,()=>{
     console.log(`Corriendo en puerto ${port}`);
