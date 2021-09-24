@@ -14,7 +14,7 @@ const { createRoles } = require('./libs/initialSetup');
 
 const http = require("http");
 setInterval(function() {
-    http.get("https://nba-crud.herokuapp.com");
+    http.get("https://nba-crud.herokuapp.com/api");
 }, 300000); //Entra a heroku cada 5 minutos
 
 
