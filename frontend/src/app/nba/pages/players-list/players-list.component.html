@@ -1,4 +1,5 @@
-<div class="grid-container">
+<h3 *ngIf="players.length === 0">Aun no hay jugadores, agrega para ver...</h3>
+<div class="grid-container" *ngIf="players">
     <div class="grid-item" *ngFor="let player of players">
         <app-card [player]="player" [usuario]="dataUser" [favoritos]="favs"></app-card>
     </div>
