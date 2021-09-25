@@ -60,7 +60,7 @@
         margin-bottom: 2em;
         @media screen and (max-width:650px){
             margin-right: 2em;
-            width: 10em;
+            width: 37.7%;
         }
         & h3{
             text-decoration-line: underline;
@@ -69,6 +69,13 @@
         }
         & p{
             font-size: 1.3em;
+        }
+    }
+
+    .buttons__li{
+        @media screen and (max-width:650px){
+            margin-bottom: 2em;
+            align-self: flex-end;
         }
     }
 

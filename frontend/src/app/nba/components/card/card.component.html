@@ -25,7 +25,7 @@
                 </h3>
                 <p>{{ player?.titles }}</p>
             </li>
-            <li>
+            <li class="buttons__li">
                 <div class="buttons">
                         <div class="delete admin-button" *ngIf="usuario.role === 'admin' || usuario.role === 'moderator'" (click)="deletePlayer()">
                             <mat-icon>close</mat-icon>
