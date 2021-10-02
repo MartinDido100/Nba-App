@@ -8,6 +8,7 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http'
 import { CookieService } from 'ngx-cookie-service';
 import { AuthInterceptor } from './auth/interceptor/auth.interceptor';
 import { GoogleLoginProvider, SocialAuthServiceConfig, SocialLoginModule } from 'angularx-social-login';
+import { environment } from '../environments/environment';
 
 
 @NgModule({
@@ -35,7 +36,7 @@ import { GoogleLoginProvider, SocialAuthServiceConfig, SocialLoginModule } from 
         providers: [
           {
             id: GoogleLoginProvider.PROVIDER_ID,
-            provider: new GoogleLoginProvider('933510400902-eaoub0e7h891nbqdtn6er8q12b762jgv.apps.googleusercontent.com')
+            provider: new GoogleLoginProvider(environment.googleId)
           }
         ] 
       } as SocialAuthServiceConfig
