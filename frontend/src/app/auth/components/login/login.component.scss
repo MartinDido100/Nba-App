@@ -50,6 +50,11 @@
             text-decoration: underline;
         }
     }
+
+    .buttons-cont{
+        display: flex;
+        gap: 2em;
+    }
 }
 
 .spinner {

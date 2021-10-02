@@ -6,6 +6,7 @@ import { environment } from 'src/environments/environment';
 import { AuthResponse, Usuario } from '../interfaces/auth.interfaces';
 import { catchError, map, tap } from 'rxjs/operators';
 import { Player } from 'src/app/nba/interfaces/nba.interfaces';
+import { SocialAuthService, GoogleLoginProvider, SocialUser } from 'angularx-social-login';
 
 @Injectable({
   providedIn: 'root'
@@ -32,7 +33,8 @@ export class AuthService {
   }
 
   constructor(private http: HttpClient,
-              private cookieService: CookieService) { }
+              private cookieService: CookieService,
+              private socialAuthService: SocialAuthService) { }
 
   registerUser(username: string, email: string, password: string):Observable<any>{
     const body = {
@@ -52,6 +54,25 @@ export class AuthService {
 
   }
   
+  googleLOgout(){
+    this.socialAuthService.signOut();
+  }
+
+   async googleLogin(): Promise<Observable<boolean>>{
+    const url = `${this.baseUrl}/auth/google`;
+    const signIn: SocialUser = await this.socialAuthService.signIn(GoogleLoginProvider.PROVIDER_ID);
+    const { email,name,id } = signIn
+    const body = {
+      username: name,
+      email,
+      password: id
+    }
+    return this.http.post<AuthResponse>(url,body).pipe(
+      tap( resp => this.cookieService.set('token',resp.token!)),
+      map(resp => resp.ok)
+    )
+  }
+
   loginUser(username: string, password: string){
 
       const url: string = `${this.baseUrl}/auth/login`;

@@ -7,6 +7,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http'
 import { CookieService } from 'ngx-cookie-service';
 import { AuthInterceptor } from './auth/interceptor/auth.interceptor';
+import { GoogleLoginProvider, SocialAuthServiceConfig, SocialLoginModule } from 'angularx-social-login';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { AuthInterceptor } from './auth/interceptor/auth.interceptor';
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    HttpClientModule
+    HttpClientModule,
+    SocialLoginModule
   ],
   providers: [
     CookieService,
@@ -25,6 +27,18 @@ import { AuthInterceptor } from './auth/interceptor/auth.interceptor';
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
       multi: true
+    },
+    {
+      provide: 'SocialAuthServiceConfig',
+      useValue: {
+        autoLogin: true,
+        providers: [
+          {
+            id: GoogleLoginProvider.PROVIDER_ID,
+            provider: new GoogleLoginProvider('933510400902-eaoub0e7h891nbqdtn6er8q12b762jgv.apps.googleusercontent.com')
+          }
+        ] 
+      } as SocialAuthServiceConfig
     }
   ],
   bootstrap: [AppComponent]

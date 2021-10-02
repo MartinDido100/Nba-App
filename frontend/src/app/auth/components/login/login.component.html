@@ -21,9 +21,11 @@
             <mat-error *ngIf="touchedButton && validate('password','required')">Contraseña obligatoria</mat-error>
           </mat-form-field>
 
-
-          <button mat-raised-button color="primary" type="submit" *ngIf="!cargando">Ingresar</button>
-          <div class='spinner' *ngIf="cargando"></div>
+          <div class="buttons-cont">
+              <button mat-raised-button color="primary" type="submit" *ngIf="!cargando">Ingresar</button>
+              <div class='spinner' *ngIf="cargando"></div>
+              <button mat-raised-button color="primary" (click)="googleLogin()" *ngIf="!cargando">Ingresar con google</button>
+          </div>
     </form>
     <p>¿No tienes cuenta? <span (click)="onCrossClicked.emit('registerForm')">Registrate</span></p>
     <span class="login-error"> {{ loginError }} </span>

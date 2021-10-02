@@ -5,6 +5,56 @@ const { generarJwt } = require('../helpers/jwt');
 const Roles = require("../models/Roles");
 const Favorito = require('../models/Favorito');
 
+const googleLogin = async (req,res = response) => {
+
+    const { username,email, password } = req.body;
+
+    try {
+
+        const existingUser = await User.findOne({ email }).populate('role');
+
+        if(!existingUser) {
+
+            const newUser = new User(req.body);
+
+            const foundRole = await Roles.findOne({name: {$in: 'user'}});
+            newUser.role = foundRole._id;
+
+            const token = await generarJwt(newUser.id,username);
+
+            const favBody = {
+                favs : [],
+                author: newUser.id
+            }
+
+            await newUser.save();
+
+            const newFavDocument = new Favorito(favBody);
+            await newFavDocument.save();
+
+            return res.status(200).json({
+                ok: true,
+                token,
+            })
+
+        }
+        
+        token = await generarJwt(existingUser,username);
+
+        return res.status(200).json({
+            ok:true,
+            token
+        })
+
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({
+            ok: false,
+            msg: 'Error de servidor'
+        })
+    }
+
+}
 
 const registerUser = async (req, res = response) => {
 
@@ -124,5 +174,6 @@ const verifyToken = async (req, res= response) => {
 module.exports = {
     registerUser,
     loginUser,
-    verifyToken
+    verifyToken,
+    googleLogin
 }

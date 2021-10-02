@@ -10,7 +10,7 @@ import { HttpErrorResponse } from '@angular/common/http';
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss']
 })
-export class RegisterComponent implements OnInit {
+export class RegisterComponent{
 
 
   @Output() onCrossClicked: EventEmitter<string> = new EventEmitter();
@@ -41,7 +41,15 @@ export class RegisterComponent implements OnInit {
   }
 
 
-  ngOnInit(): void {
+  async googleLogin(){
+    const google = await this.aS.googleLogin();
+    this.cargando = true;
+    google.subscribe(ok => {
+      if(ok){
+        this.router.navigateByUrl('/nba');
+      }
+    },
+    (err : HttpErrorResponse) => this.registerErrorMsg = err.error.msg);
   }
 
   register() { 

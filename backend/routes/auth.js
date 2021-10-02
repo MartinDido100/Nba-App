@@ -1,6 +1,6 @@
 const { Router } = require("express");
 const { check } = require('express-validator');
-const { registerUser, loginUser, verifyToken } = require("../controllers/auth");
+const { registerUser, loginUser, verifyToken, googleLogin } = require("../controllers/auth");
 const { validarCampos } = require("../middlewares/validarCampos");
 const { validarJWT } = require('../middlewares/validar-jwt');
 
@@ -20,6 +20,8 @@ router.post('/login',[
     check('password','Contraseña obligatoria').isLength({min: 6}).notEmpty(),
     validarCampos   
 ],loginUser);
+
+router.post('/google',googleLogin);
 
 router.get('/verify',validarJWT,verifyToken);
 

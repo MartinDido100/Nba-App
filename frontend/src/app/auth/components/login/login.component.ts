@@ -36,6 +36,17 @@ export class LoginComponent implements OnInit {
     return this.vS.validateField(field,this.loginForm,error);
 
   }
+  
+  async googleLogin(){
+    const google = await this.aS.googleLogin();
+    this.cargando = true;
+    google.subscribe(ok => {
+      if(ok){
+        this.router.navigateByUrl('/nba');
+      }
+    },
+    (err : HttpErrorResponse) => this.loginError = err.error.msg);
+  }
 
   login(){
     this.touchedButton = true;

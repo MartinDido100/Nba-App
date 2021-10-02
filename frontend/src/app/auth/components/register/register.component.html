@@ -47,8 +47,11 @@
             <mat-error *ngIf="touchedButton && validate('password2','noIguales')">Las contraseñas no coinciden</mat-error>
           </mat-form-field>
 
-          <button mat-raised-button color="primary" type="submit" *ngIf="!cargando">Crear Cuenta</button>
-          <div class='spinner' *ngIf="cargando"></div>
+          <div class="buttons-cont">
+              <button mat-raised-button color="primary" type="submit" *ngIf="!cargando">Ingresar</button>
+              <div class='spinner' *ngIf="cargando"></div>
+              <button mat-raised-button color="primary" (click)="googleLogin()" *ngIf="!cargando" type="button">Ingresar con google</button>
+          </div>
     </form>
     <p>¿Ya tienes cuenta? <span (click)="onCrossClicked.emit('loginForm')">Inicia Sesion</span></p>
     <span class="register-error"> {{ registerErrorMsg }} </span>

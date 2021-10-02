@@ -28,6 +28,7 @@ export class HeaderComponent{
   @Input() logged : boolean = false;
 
   logout(){
+    this.aS.googleLOgout();
     this.cS.delete('token');
     this.cS.deleteAll('/');
     this.router.navigateByUrl('/');
