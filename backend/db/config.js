@@ -2,9 +2,8 @@ const mongoose = require('mongoose');
 
 
 const dbConnection = async () => {
-    console.log(process.env.DB_CNN)  
     try {
-        await mongoose.connect('mongodb+srv://dbUser:degeneracionx12@authcloster.1qwch.mongodb.net/nbaDb',{
+        await mongoose.connect(procces.env.DB_CNN,{
             useNewUrlParser : true,
             useUnifiedTopology: true,
         });
